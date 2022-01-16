@@ -37,3 +37,6 @@ README〜ER図作成：1/15
 β版をRUNTEQ内リリース（MVP）：2/10〆切
 
 本番リリース：2月中旬
+
+## 画面遷移図
+https://www.figma.com/file/9pTwrlhGkZSWjZPVAtR7NI/%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA?node-id=1%3A4
