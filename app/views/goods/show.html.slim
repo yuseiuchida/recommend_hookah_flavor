@@ -1,0 +1,9 @@
+p#notice
+  = notice
+p
+  strong
+    | Count:
+  = @good.count
+= link_to 'Edit', edit_good_path(@good)
+|  | 
+= link_to 'Back', goods_path
