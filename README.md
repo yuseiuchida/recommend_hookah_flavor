@@ -43,3 +43,4 @@ https://www.figma.com/file/9pTwrlhGkZSWjZPVAtR7NI/%E3%83%9D%E3%83%BC%E3%83%88%E3
 
 ## ER図
 https://drive.google.com/file/d/1x9fVCufbPlDp1OfVqiwR2hRwm-AbwsSh/view?usp=sharing
+[![Image from Gyazo](https://i.gyazo.com/8c4dfb3f810eb7eaa3e7364514ef777e.png)](https://gyazo.com/8c4dfb3f810eb7eaa3e7364514ef777e)
