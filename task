@@ -1,0 +1,17 @@
+1. rails_setup
+=> 環境構築
+
+2. scaffold
+=> 雛形を作成
+
+3. setup_sorcery
+=> ログイン機能を設定
+
+4. setup_models
+=> モデルを作成
+
+5. setup_controllers
+=> コントローラーを作成
+
+6. setup_views
+=> ビュを作成
