@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  option1: 1
+  option2: 1
+  option3: 1
+  option4: 1
+  option5: 1
+
+two:
+  option1: 1
+  option2: 1
+  option3: 1
+  option4: 1
+  option5: 1

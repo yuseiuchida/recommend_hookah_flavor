@@ -1,0 +1,42 @@
+<%= form_with(model: aim) do |form| %>
+  <% if aim.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(aim.errors.count, "error") %> prohibited this aim from being saved:</h2>
+
+      <ul>
+        <% aim.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :option1 %>
+    <%= form.number_field :option1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option2 %>
+    <%= form.number_field :option2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option3 %>
+    <%= form.number_field :option3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option4 %>
+    <%= form.number_field :option4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option5 %>
+    <%= form.number_field :option5 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
