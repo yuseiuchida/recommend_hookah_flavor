@@ -25,10 +25,10 @@ table
         td
           = review.comment
         td
-          = link_to 'Show', review
+          = link_to 'Show', review, class: "btn btn btn-primary btn-sm"
         td
-          = link_to 'Edit', edit_review_path(review)
+          = link_to 'Edit', edit_review_path(review), class: "btn btn-success btn-sm"
         td
-          = link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
 br
 = link_to 'New Review', new_review_path

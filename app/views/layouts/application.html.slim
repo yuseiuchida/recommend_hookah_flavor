@@ -1,24 +1,16 @@
 doctype html
 html
   head
-    title
-      | Tutorial
-    = stylesheet_link_tag    "application"
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
   body
-    = link_to "Top", '/'
-    |  | 
-    - if current_user
-      = link_to "Edit Profile", edit_user_path(current_user.id)
-      |  | 
-      = link_to "Logout", :logout, method: :post
-    - else
-      = link_to "Register", new_user_path
-      |  | 
-      = link_to "Login", :login
+    = render 'layouts/header'
+
     div
       p#notice
         = flash[:notice]
       p#alert
         = flash[:alert]
     = yield
+    = render 'layouts/footer'
