@@ -14,7 +14,6 @@ class FlavorsTest < ApplicationSystemTestCase
     visit flavors_url
     click_on "New Flavor"
 
-    fill_in "Name", with: @flavor.name
     click_on "Create Flavor"
 
     assert_text "Flavor was successfully created"
@@ -25,7 +24,6 @@ class FlavorsTest < ApplicationSystemTestCase
     visit flavors_url
     click_on "Edit", match: :first
 
-    fill_in "Name", with: @flavor.name
     click_on "Update Flavor"
 
     assert_text "Flavor was successfully updated"

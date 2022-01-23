@@ -17,7 +17,7 @@ class FlavorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create flavor" do
     assert_difference('Flavor.count') do
-      post flavors_url, params: { flavor: { name: @flavor.name } }
+      post flavors_url, params: { flavor: {  } }
     end
 
     assert_redirected_to flavor_url(Flavor.last)
@@ -34,7 +34,7 @@ class FlavorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update flavor" do
-    patch flavor_url(@flavor), params: { flavor: { name: @flavor.name } }
+    patch flavor_url(@flavor), params: { flavor: {  } }
     assert_redirected_to flavor_url(@flavor)
   end
 

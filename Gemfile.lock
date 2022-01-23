@@ -95,6 +95,8 @@ GEM
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     debug_inspector (1.1.0)
+    enum_help (0.0.17)
+      activesupport (>= 3.0.0)
     erubi (1.10.0)
     execjs (2.8.1)
     faraday (1.4.1)
@@ -294,6 +296,7 @@ DEPENDENCIES
   bootstrap (~> 4.3.1)
   byebug
   capybara (>= 3.26)
+  enum_help
   font-awesome-sass (~> 5.11.2)
   html2slim
   jbuilder (~> 2.7)

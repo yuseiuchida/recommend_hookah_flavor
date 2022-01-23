@@ -65,6 +65,6 @@ class FlavorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def flavor_params
-      params.require(:flavor).permit(:name)
+      params.fetch(:flavor, {})
     end
 end

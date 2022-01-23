@@ -1,15 +1,12 @@
-= form_with(model: flavor) do |form|
-  - if flavor.errors.any?
+= form_for @flavor do |f|
+  f.field 
+    = f.label :name
+    = f.text_field :name
+  - if @flavor.errors.any?
     #error_explanation
-      h2
-        = pluralize(flavor.errors.count, "error")
-        |  prohibited this flavor from being saved:
+      h2 = "#{pluralize(@flavor.errors.count, 'error')} prohibited this flavor from being saved:"
       ul
-        - flavor.errors.each do |error|
-          li
-            = error.full_message
-  .field
-    = form.label :name
-    = form.text_field :name
-  .actions
-    = form.submit
+        - @flavor.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit
