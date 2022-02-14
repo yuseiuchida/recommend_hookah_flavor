@@ -8,11 +8,13 @@ class FlavorsController < ApplicationController
 
   # GET /flavors/1 or /flavors/1.json
   def show
+    @review = Review.new
   end
 
   # GET /flavors/new
   def new
     @flavor = Flavor.new
+    @categories = Category.all
   end
 
   # GET /flavors/1/edit
@@ -22,16 +24,23 @@ class FlavorsController < ApplicationController
   # POST /flavors or /flavors.json
   def create
     @flavor = Flavor.new(flavor_params)
-
-    respond_to do |format|
-      if @flavor.save
-        format.html { redirect_to flavor_url(@flavor), notice: "Flavor was successfully created." }
-        format.json { render :show, status: :created, location: @flavor }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @flavor.errors, status: :unprocessable_entity }
+    name_array = [flavor_params[:flavor_element_base]]
+    flavor_element_option_1 = flavor_params[:flavor_element_option_1]
+    flavor_element_option_2 = flavor_params[:flavor_element_option_2]
+      if flavor_element_option_1.present?
+        name_array << flavor_element_option_1
       end
+      if flavor_element_option_2.present?
+        name_array << flavor_element_option_2
+      end
+    @flavor.name = name_array.join(' / ')
+    if @flavor.valid?
+      @flavor.save
+      return redirect_to flavors_path
+    else
+      render root_path
     end
+
   end
 
   # PATCH/PUT /flavors/1 or /flavors/1.json
@@ -57,14 +66,27 @@ class FlavorsController < ApplicationController
     end
   end
 
+  def bookmarks
+    @bookmark_flavors = current_user.bookmark_flavors.order(created_at: :desc)
+  end
+
+  def search
+    @q = Flavor.search(search_params)
+    @flavors = @q.result(distinct: true)
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_flavor
       @flavor = Flavor.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def flavor_params
-      params.fetch(:flavor, {})
+      params.require(:flavor).permit(
+        :sweet, :refresh, :relax, :body, :flavor_element_base, :flavor_element_option_1, :flavor_element_option_2, { category_ids: []}
+        )
+    end
+
+    def search_params
+      params.require(:q).permit!
     end
 end

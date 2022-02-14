@@ -1,9 +1,14 @@
-header
-  = link_to root_path do
-    = image_tag "logo.png", :size =>'300x100'
-  - if current_user
-    = link_to "Edit Profile", edit_user_path(current_user.id), class: "nav-link"
-    = link_to "Logout", :logout, method: :post, class: "nav-link"
-  - else
-    = link_to "Register", new_user_path, class: "nav-link"
-    = link_to "Login", :login, class: "nav-link"
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .navbar-brand.ps-3
+    = link_to root_path do
+      = image_tag "logo.png", :size =>'150x50'
+  ul.navbar-nav.me-auto
+    li.nav_item = link_to "フレーバー", flavors_path, class: "nav-link"
+    - if current_user
+      li.nav_item = link_to "お気に入り", bookmarks_flavors_path, class: "nav-link"
+  ul.navbar-nav.mx-3
+    - if current_user
+      li.nav_item = link_to "ログアウト", :logout, method: :post, class: "nav-link"
+    - else
+      li.nav_item = link_to "新規登録", new_user_path, class: "nav-link"
+      li.nav_item = link_to "ログイン", :login, class: "nav-link"

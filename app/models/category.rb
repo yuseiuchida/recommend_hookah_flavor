@@ -1,11 +1,6 @@
 class Category < ApplicationRecord
-  has_many :flavors
+  has_many :flavor_categories
+  has_many :flavors, through: :flavor_categories
 
-  validates :name, presence: true
   validates :kind, presence: true
-  validates :fruit, presence: true
-  validates :sweet, presence: true
-  validates :refresh, presence: true
-  validates :alcohol, presence: true
-
 end

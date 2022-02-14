@@ -1,1 +1,46 @@
-<p id="test">診断フィールド</p>
+.container
+  .text
+    .search-box
+      = form_with url: search_path, local: true do |f|
+        f.form-group
+          h4.text-center 質問1: シーシャ初心者？
+          = f.radio_button :experience, "beginner"
+          = f.label :yes, "はい"
+          = f.radio_button :experience, "known"
+          = f.label :no, "いいえ"
+        f.form-group
+          h4.text-center 質問2: どの味が好き？
+          = f.radio_button :taste, "アップル"
+          = f.label :apple, "アップル"
+          = f.radio_button :taste, "グレープ"
+          = f.label :grape, "グレープ"
+          = f.radio_button :taste, "レモン"
+          = f.label :lemmon, "レモン"
+          = f.radio_button :taste, "ピーチ"
+          = f.label :peach, "ピーチ"
+          = f.radio_button :taste, "バナナ"
+          = f.label :banana, "バナナ"
+          = f.radio_button :taste, "マンゴー"
+          = f.label :mango, "マンゴー"
+          = f.radio_button :taste, "パイナップル"
+          = f.label :painapple, "パイナップル"
+          = f.radio_button :taste, "スイカ"
+          = f.label :suica, "スイカ"
+          = f.radio_button :taste, "alcohol"
+          = f.label :alcohol, "お酒"
+          = f.radio_button :taste, "other"
+          = f.label :other, "特になし"
+        f.form-group
+          h4.text-center 質問3: 今の気分は？
+          = f.radio_button :feeling, "refresh"
+          = f.label :refresh, "シャキッとしたい"
+          = f.radio_button :feeling, "relax"
+          = f.label :relax, "リラックスしたい"
+          = f.radio_button :feeling, "sweet"
+          = f.label :sweet, "甘いのが吸いたい"
+          = f.radio_button :feeling, "not_sweet"
+          = f.label :not_sweet, "甘いは避けたい"
+          = f.radio_button :feeling, "none"
+          = f.label :none, "こだわりなし"
+        .action 
+          = f.submit '診断'

@@ -3,7 +3,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
+    @flavor = Flavor.find(params[:flavor_id])
+    @reviews = @flavor.reviews
   end
 
   # GET /reviews/1 or /reviews/1.json
@@ -21,17 +22,13 @@ class ReviewsController < ApplicationController
 
   # POST /reviews or /reviews.json
   def create
-    @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    @review = current_user.reviews.new(review_params)
+    if @review.save
+      redirect_to flavor_reviews_path(@review.flavor)
+    else
+      redirect_to root_path
     end
+
   end
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
@@ -65,6 +62,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.fetch(:review, {})
+      params.require(:review).permit(:star, :comment, :flavor_id)
     end
 end

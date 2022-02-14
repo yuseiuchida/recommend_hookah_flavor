@@ -1,19 +1,26 @@
-h1 一覧
-
-table
+h1  = @flavor.name
+table.table
   thead
     tr
-      th
-      th
-      th
-
+      th 
+      th 評価
+      th スコア
+      th コメント
   tbody
     - @reviews.each do |review|
       tr
-        td = link_to 'Show', review
-        td = link_to 'Edit', edit_review_path(review)
-        td = link_to 'Destroy', review, data: { confirm: 'Are you sure?' }, method: :delete
+        td
+        td id="star-#{review.id}"
+        td #{review.star.to_i}点
+        td = review.comment
+        td
+        td
 
-br
-
-= link_to 'New Review', new_review_path
+        javascript: 
+          $('#star-#{review.id}').empty();
+            $('#star-#{review.id}').raty({
+              starOff: "#{asset_path('star-off.png')}",
+              starOn: "#{asset_path('star-on.png')}",
+              readOnly: true,
+              score: "#{review.star}",
+            })

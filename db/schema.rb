@@ -10,40 +10,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_105344) do
+ActiveRecord::Schema.define(version: 2022_02_13_164144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "flavor_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["flavor_id"], name: "index_bookmarks_on_flavor_id"
+    t.index ["user_id", "flavor_id"], name: "index_bookmarks_on_user_id_and_flavor_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "kind", null: false
-    t.string "fruit", null: false
-    t.string "sweet", null: false
-    t.string "refresh", null: false
-    t.string "alcohol", null: false
+    t.string "kind"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "flavors", force: :cascade do |t|
+  create_table "flavor_categories", force: :cascade do |t|
+    t.bigint "flavor_id"
     t.bigint "category_id"
-    t.string "name", null: false
-    t.text "body"
-    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_flavors_on_category_id"
+    t.index ["category_id"], name: "index_flavor_categories_on_category_id"
+    t.index ["flavor_id"], name: "index_flavor_categories_on_flavor_id"
+  end
+
+  create_table "flavors", force: :cascade do |t|
+    t.string "name"
+    t.string "flavor_element_base"
+    t.text "body"
+    t.float "sweet"
+    t.float "refresh"
+    t.float "relax"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "score"
+    t.index ["name"], name: "index_flavors_on_name", unique: true
+  end
+
+  create_table "recommends", force: :cascade do |t|
+    t.string "taste", null: false
+    t.string "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "flavor_id"
-    t.integer "star", null: false
+    t.float "star"
     t.text "comment"
-    t.integer "good"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "good"
     t.index ["flavor_id"], name: "index_reviews_on_flavor_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -58,7 +82,10 @@ ActiveRecord::Schema.define(version: 2022_01_22_105344) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "flavors", "categories"
+  add_foreign_key "bookmarks", "flavors"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "flavor_categories", "categories"
+  add_foreign_key "flavor_categories", "flavors"
   add_foreign_key "reviews", "flavors"
   add_foreign_key "reviews", "users"
 end

@@ -1,0 +1,4 @@
+- if current_user.bookmark?(flavor)
+    = render 'unbookmark', { flavor: flavor }
+- else
+    = render 'bookmark', { flavor: flavor }

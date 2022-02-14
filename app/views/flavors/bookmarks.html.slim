@@ -1,0 +1,8 @@
+section.section.mt-6 
+  .container
+    .columns
+      .column.row
+        - if @bookmark_flavors.present?
+          = render @bookmark_flavors
+        - else
+          p empty

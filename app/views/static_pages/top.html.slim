@@ -1,7 +1,19 @@
-.search
-  p 条件から探す
-  = render "static_pages/form"
-  = link_to '探す', static_pages_result_path
-  p 一覧から探す
-.search
-  = link_to '全て表示', reviews_path
+.toppage.text-center
+  = image_tag 'toppage_logo.png', width: '50%'
+.search.mt-5
+  .container
+    h4.text-center 診断する
+    .search-form.mt-5
+      = render "form"
+
+.search.mt-5
+  .container 
+    h4.text-center 検索する
+    .search-form.mt-5.text-center
+      = search_form_for @q, url: flavors_search_path, class:"search-form" do |f|
+        = f.search_field :name_cont, placeholder: '名前から探す', class:'input-box'
+        br
+        = f.collection_check_boxes :categories_id_in, @categories, :id, :kind
+        br
+        = f.button type: "submit", class:"search-button" do 
+          i.fas.fa-search

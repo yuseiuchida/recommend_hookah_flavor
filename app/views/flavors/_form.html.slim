@@ -1,7 +1,4 @@
-= form_for @flavor do |f|
-  f.field 
-    = f.label :name
-    = f.text_field :name
+= form_with(model: @flavor, url: flavors_path, local: true)do |f|
   - if @flavor.errors.any?
     #error_explanation
       h2 = "#{pluralize(@flavor.errors.count, 'error')} prohibited this flavor from being saved:"
@@ -9,4 +6,54 @@
         - @flavor.errors.full_messages.each do |message|
           li = message
 
-  .actions = f.submit
+  h1 フレーバーを登録する
+  .container
+    .panel.panel-default
+      .panel-body
+        .form-group
+          p  ジャンル
+          f.form-check
+            = f.collection_check_boxes(:category_ids, @categories, :id, :kind) do |kind|
+              = kind.check_box 
+              = kind.text
+        br
+        .form-group
+          p フレーバー
+          f.form-check id='name-area'
+            = f.text_field :flavor_element_base
+          f.form-button
+            input onclick="addForm()" type="button" value="フレーバー追加"
+            
+          javascript: 
+            let i = 1;
+            function addForm(){
+              if(i<=2){
+                let input_data = document.createElement('input');
+                input_data.type = 'text'
+                input_data.name = 'flavor[flavor_element_option_'+i+']'
+                input_data.id = 'flavor_element_option_'+i
+                let parent = document.getElementById('name-area');
+                parent.appendChild(input_data);
+                i++
+              }
+            }
+            
+
+        br
+        .form-group
+          p 甘さ
+          f.form-check
+            = f.range_field :sweet, in: 1..10
+        br
+        .form-group 
+          p すっきり感
+          f.form-check
+            = f.range_field :refresh, in: 1..10
+        br
+        .form-group
+          p リラックス感
+          f.form-check
+            = f.range_field :relax, in: 1..10
+        br
+        .actions 
+          = f.submit '登録'

@@ -1,5 +1,9 @@
-p#notice = notice
-
-=> link_to 'Edit', edit_flavor_path(@flavor)
-'|
-=< link_to 'Back', flavors_path
+.container
+  .columns.is-centered
+    .column.is-5
+      .card.mb-6
+        header.card-header
+          h5.card-title = @flavor.name
+        .card-content
+          h6.card-body = @flavor.body
+    = render 'reviews/form', review: @review, flavor: @flavor

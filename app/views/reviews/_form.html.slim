@@ -1,9 +1,28 @@
-= form_for @review do |f|
-  - if @review.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@review.errors.count, 'error')} prohibited this review from being saved:"
-      ul
-        - @review.errors.full_messages.each do |message|
-          li = message
+- if @review.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(@review.errors.count, 'error')} prohibited this review from being saved:"
+    ul
+      - @review.errors.full_messages.each do |message|
+        li = message
 
-  .actions = f.submit
+h5 レビューを書く
+
+.rating-box.mt-3
+  = form_with(model: review, url: flavor_reviews_path(flavor), local: true)do |f|
+    .form-group
+      = f.hidden_field :flavor_id, value: flavor.id
+    .form-group#star
+      = f.hidden_field :star, id: :review_star
+    .form-group
+      = f.text_field :comment
+    .action
+    = f.submit '投稿'
+    = link_to '他のレビューを見る', flavor_reviews_path(flavor)
+
+
+javascript: 
+  $('#star').raty({
+  starOff: "#{asset_path('star-off.png')}",
+  starOn: "#{asset_path('star-on.png')}",
+  scoreName: 'review[star]',
+  })

@@ -1,0 +1,11 @@
+.result
+  h2 = @recommend.content
+  .container
+    .columns
+      .row
+        - if @flavors.empty?
+          = render 'result'
+        - else
+          = render 'recommend', flavors: @flavors
+
+= link_to 'もう一度診断', root_path

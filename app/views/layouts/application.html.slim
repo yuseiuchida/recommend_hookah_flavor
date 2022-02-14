@@ -4,13 +4,12 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-  body
-    = render 'layouts/header'
 
+  body
+    = render "layouts/header"
     div
       p#notice
         = flash[:notice]
       p#alert
         = flash[:alert]
     = yield
-    = render 'layouts/footer'

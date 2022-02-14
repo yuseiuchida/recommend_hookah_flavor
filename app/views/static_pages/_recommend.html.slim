@@ -1,0 +1,16 @@
+- flavors.each do |flavor|
+  .card-columns.col-mb-3.mt-3 style="width: 32%;"
+    .card
+      h5.card-title = flavor.name
+      div id="star-rate-#{flavor.id}"
+        javascript: 
+          $('#star-rate-#{flavor.id}').empty();
+          $('#star-rate-#{flavor.id}').raty({
+            starOff: "#{asset_path('star-off.png')}",
+            starOn: "#{asset_path('star-on.png')}",
+            readOnly: true,
+            score: "#{flavor.reviews.average(:star).to_f.round}",
+          })
+      = link_to 'レビューを見る', flavor_reviews_path(flavor),class: 'btn btn-light btn-sm'
+      - if current_user
+        = link_to 'レビューを投稿する', flavor_path(flavor), class: 'btn btn-light btn-sm'
